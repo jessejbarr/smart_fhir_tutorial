@@ -11,12 +11,7 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
-        
-        var allg = smart.patient.api.fetchAll({
-        type: 'AllergyIntolerance'
-                  });
-        $.when(pt, allg).fail(onError);  
-        
+
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -25,7 +20,8 @@
                               'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                       }
-                    }
+                    },
+                    type: 'AllergyIntolerance'
                   });
       
         $.when(pt, obv).fail(onError);
