@@ -20,7 +20,12 @@
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                       }
                     },
-                    type: 'AllergyIntolerance'
+                    type: 'AllergyIntolerance',
+                    query: {
+                      code: {
+                        $or: ['http://snomed.info/sct|227255003']
+                      }
+                    }
                   });
       
         $.when(pt, obv).fail(onError);
