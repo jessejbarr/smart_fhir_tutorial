@@ -13,12 +13,7 @@
         var pt = patient.read();
         
         var allg = smart.patient.api.fetchAll({
-        type: 'AllergyIntolerance',
-                    query: {
-                      _id: {
-                             ['12780483']
-                      }
-                    }
+        type: 'AllergyIntolerance'
                   });
         $.when(pt, allg).fail(onError);  
         
@@ -38,7 +33,6 @@
 
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
-          var byCodesall = smart.byCodes(allg, 'code');
           var gender = patient.gender;
 
           var fname = '';
@@ -58,7 +52,7 @@
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
-          p.allergy = byCodesall;
+          p.allergy = patient.allg[0];
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
