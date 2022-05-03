@@ -19,16 +19,11 @@
                               'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                       }
-                    }
+                    },
+                    type: 'AllergyIntolerance'
                   });
       
         $.when(pt, obv).fail(onError);
-
-        var varAllergy = smart.patient.api.fetchAll({
-          type: 'AllergyIntolerance',
-          query: {
-          }
-        });
 
 
         $.when(pt, obv).done(function(patient, obv) {
