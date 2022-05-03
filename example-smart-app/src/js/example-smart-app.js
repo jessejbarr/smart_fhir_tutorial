@@ -11,6 +11,17 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
+        
+        var allg = smart.patient.api.fetchAll({
+        type: 'AllergyIntolerance',
+                    query: {
+                      code: {
+                        $or: ['http://snomed.info/sct|227255003']
+                      }
+                    }
+                  });
+        $.when(pt, allg).fail(onError);  
+        
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -18,12 +29,6 @@
                         $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
                               'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
-                      }
-                    },
-                    type: 'AllergyIntolerance',
-                    query: {
-                      code: {
-                        $or: ['http://snomed.info/sct|227255003']
                       }
                     }
                   });
@@ -33,6 +38,7 @@
 
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
+          var byCodesall = smart.byCodes(allg, 'code');
           var gender = patient.gender;
 
           var fname = '';
@@ -52,7 +58,7 @@
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
-          p.allergy = varAllergy;
+          p.allergy = byCodesall;
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
