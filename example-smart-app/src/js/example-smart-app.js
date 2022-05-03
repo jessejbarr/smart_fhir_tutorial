@@ -52,7 +52,7 @@
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
-          p.allergy = patient.allg[0];
+          //p.allergy = patient.allg[0];
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
