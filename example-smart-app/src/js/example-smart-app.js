@@ -15,8 +15,8 @@
         var allg = smart.patient.api.fetchAll({
         type: 'AllergyIntolerance',
                     query: {
-                      code: {
-                        $or: ['http://snomed.info/sct|227255003']
+                      _id: {
+                             ['12780483']
                       }
                     }
                   });
