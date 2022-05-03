@@ -124,6 +124,7 @@
     $('#fname').html(p.fname);
     $('#lname').html(p.lname);
     $('#gender').html(p.gender);
+    $('#gender').html(p.allergy);
     $('#birthdate').html(p.birthdate);
     $('#height').html(p.height);
     $('#systolicbp').html(p.systolicbp);
