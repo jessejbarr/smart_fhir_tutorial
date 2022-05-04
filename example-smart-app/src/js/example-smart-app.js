@@ -23,16 +23,19 @@
                     }
                   });      
       
-                  $.when(pt, obv).fail(onError);
 
         var allergy = smart.patient.api.fetchAll({
-                      type: 'AllergyIntolerance'
-        });
+                    type: 'AllergyIntolerance'
+      });
+
+                  $.when(pt, obv, allergy).fail(onError);
+
+
 
                   //$.when(pt, allergy).fail(onError);
 
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, allergy).done(function(patient, obv, allergy) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
@@ -53,7 +56,7 @@
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
-          //p.allergy = patient.allergy[0];
+          p.allergy = allergy.id[0];
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
