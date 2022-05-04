@@ -29,7 +29,7 @@
                       type: 'AllergyIntolerance'
         });
 
-                  $.when(pt, allergy).fail(onError);
+                  //$.when(pt, allergy).fail(onError);
 
 
         $.when(pt, obv).done(function(patient, obv) {
@@ -53,7 +53,7 @@
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
-          p.allergy = patient.allergy[0];
+          //p.allergy = patient.allergy[0];
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
