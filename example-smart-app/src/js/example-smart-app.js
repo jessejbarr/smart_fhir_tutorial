@@ -11,7 +11,6 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
-
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -21,19 +20,9 @@
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                       }
                     }
-                  });      
-      
+                  });
 
-       // var allergy = smart.patient.api.fetchAll({
-         //           type: 'AllergyIntolerance'
-      //});
-
-                  $.when(pt, obv).fail(onError);
-
-
-
-                  //$.when(pt, allergy).fail(onError);
-
+        $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
@@ -56,7 +45,6 @@
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
-          //p.allergy = allergy.id[0];
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
@@ -89,7 +77,6 @@
       fname: {value: ''},
       lname: {value: ''},
       gender: {value: ''},
-      allergy: {value: ''},
       birthdate: {value: ''},
       height: {value: ''},
       systolicbp: {value: ''},
@@ -133,7 +120,6 @@
     $('#fname').html(p.fname);
     $('#lname').html(p.lname);
     $('#gender').html(p.gender);
-    $('#varAllergy').html(p.allergy);
     $('#birthdate').html(p.birthdate);
     $('#height').html(p.height);
     $('#systolicbp').html(p.systolicbp);
