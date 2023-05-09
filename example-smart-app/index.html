@@ -12,12 +12,17 @@
 			success: function(data){
 				// Do something with the returned data
         console.log(data);
-			}
+        $("#myHeading").text(data);
+			},
+      error: function(jqXHR, textStatus, errorThrown){
+        console.log('Error: ' + errorThrown);
+      }
 		});
 	});
 	</script>
 </head>
 <body>
-	<h1>Welcome to My GitHub Page</h1>
+	<h1>Welcome to My GitHub Pages</h1>
+  <h1 id="myHeading"></h1>
 </body>
 </html>
